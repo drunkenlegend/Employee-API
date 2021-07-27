@@ -1,10 +1,15 @@
 package com.api.employee.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.Id;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 
-public class EmployeeDto implements Serializable {
+@Getter
+@Setter
+public class EmployeeDTO implements Serializable {
     @Id
     private Integer empId;
 

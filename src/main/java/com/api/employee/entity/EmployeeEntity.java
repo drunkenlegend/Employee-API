@@ -1,6 +1,9 @@
 package com.api.employee.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -19,6 +22,7 @@ public class EmployeeEntity implements Serializable {
   @NotEmpty
   @Size(min = 2, max = 100)
   private String empFirstName;
+
   @Size(max = 100)
   private String empLastName;
 

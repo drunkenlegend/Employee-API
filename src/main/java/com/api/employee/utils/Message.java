@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 public class Message {
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
   private LocalDateTime timestamp;
+
   private String message;
   private String desc;
   private String statusCode;
@@ -22,6 +23,4 @@ public class Message {
     this.desc = desc;
     this.statusCode = statusCode;
   }
-
-
 }

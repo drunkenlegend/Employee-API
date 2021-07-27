@@ -14,9 +14,6 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
             description = "This api provides CRUD operations on Employee Entity",
             version = "1.0",
             contact = @Contact(name = "Saksham Gupta", email = "saksham1319@gmail.com")),
-    security =
-        @SecurityRequirement(
-            name = "bearerAuth",
-            scopes = {}))
-@SecurityScheme(type = SecuritySchemeType.HTTP,name = "bearerAuth",scheme = "bearer")
+    security = @SecurityRequirement(name = "bearerAuth"))
+@SecurityScheme(type = SecuritySchemeType.HTTP, name = "bearerAuth", scheme = "bearer")
 public class OpenAPIConfiguration {}

@@ -14,5 +14,6 @@ public interface EmployeeRepository extends PagingAndSortingRepository<EmployeeE
   List<EmployeeEntity> findByEmpEmail(String email);
 
   Page<EmployeeEntity> findAll(Specification<EmployeeEntity> spec, Pageable pageable);
-      List<EmployeeEntity> findAll();
+
+  List<EmployeeEntity> findAll();
 }

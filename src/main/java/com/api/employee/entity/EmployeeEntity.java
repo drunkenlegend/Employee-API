@@ -5,8 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 
@@ -17,22 +16,29 @@ import java.io.Serializable;
 @Entity
 public class EmployeeEntity implements Serializable {
 
-  @Id private Integer empId;
+    @Id
+    private Integer empId;
 
-  @NotEmpty
-  @Size(min = 2, max = 100)
-  private String empFirstName;
+    @NotEmpty
+    @Size(min = 2, max = 100)
+    private String empFirstName;
 
-  @Size(max = 100)
-  private String empLastName;
+    @Size(max = 100)
+    private String empLastName;
 
-  @NotEmpty @Email private String empEmail;
+    @NotEmpty
+    @Email
+    private String empEmail;
 
-  @NotNull
-  @Pattern(
-      regexp = "(^([+]\\d{2}([ ])?)?\\d{10}$)",
-      message = "Number should be in format: {+91 1234567890, +911234567890, 1234567890}")
-  private String empContactNumber;
+    @NotNull
+    @Pattern(
+            regexp = "(^([+]\\d{2}([ ])?)?\\d{10}$)",
+            message = "Number should be in format: {+91 1234567890, +911234567890, 1234567890}")
+    private String empContactNumber;
 
-  private Integer deptId;
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "location")
+    private AddressEntity addressEntity;
+
+    private Integer deptId;
 }

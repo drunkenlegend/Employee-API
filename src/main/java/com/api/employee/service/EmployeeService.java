@@ -12,13 +12,13 @@ public interface EmployeeService {
 
   EmployeeDTO createEmployee(EmployeeDTO employeeEntity, Integer deptId);
 
-  EmployeeDTO getEmployeeById(Integer id);
+  EmployeeDTO getEmployeeById(Integer id,Integer dept);
 
-  EmployeeDTO updateEmployeeById(Integer id, EmployeeDTO employeeEntity);
+  EmployeeDTO updateEmployeeById(Integer id,Integer dept, EmployeeDTO employeeEntity);
 
-  EmployeeDTO patchEmployeeById(Integer id, EmployeeDTO employeeEntity);
+  EmployeeDTO patchEmployeeById(Integer id,Integer dept, EmployeeDTO employeeEntity);
 
   List<EmployeeDTO> batchCreateEmployee(List<EmployeeDTO> employeeDTOS);
 
-  Message deleteEmployeeById(Integer id);
+  Message deleteEmployeeById(Integer id,Integer dept);
 }

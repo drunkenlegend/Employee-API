@@ -16,8 +16,8 @@ import java.io.Serializable;
 @Entity
 public class EmployeeEntity implements Serializable {
 
-    @Id
-    private Integer empId;
+    @EmbeddedId
+    private EmployeeKey employeeKey;
 
     @NotEmpty
     @Size(min = 2, max = 100)
@@ -40,5 +40,5 @@ public class EmployeeEntity implements Serializable {
     @JoinColumn(name = "location")
     private AddressEntity addressEntity;
 
-    private Integer deptId;
+
 }

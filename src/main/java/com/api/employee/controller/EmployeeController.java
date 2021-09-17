@@ -58,47 +58,59 @@ public class EmployeeController {
         return ResponseEntity.ok().body(service.getAllEmployees(pageNo, pageSize, sortBy, keyword));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}/{dept}")
     @Operation(
-            summary = "GET /v1/employees/{id}",
-            description = "To get employee with EmpId equal to passed id")
+            summary = "GET /v1/employees/{empId,deptId}",
+            description = "To get employee with Employee having passed id and department id")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<EmployeeDTO> getEmployee(
             @PathVariable
-            @Parameter(name = "id", description = "Please employee id to search for", example = "123")
-                    Integer id) {
-        return ResponseEntity.ok().body(service.getEmployeeById(id));
+            @Parameter(name = "id", description = "Please enter employee id to search for", example = "123")
+                    Integer id, @PathVariable
+            @Parameter(name = "dept", description = "Please enter department id of the employee", example = "123")
+                    Integer dept) {
+        return ResponseEntity.ok().body(service.getEmployeeById(id, dept));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}/{dept}")
     @Operation(
             summary = "PUT /v1/employees/{id}",
             description = "To put employee with EmpId equal to passed id")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<EmployeeDTO> updateEmployee(
-            @PathVariable Integer id, @RequestBody EmployeeDTO emp) {
+            @PathVariable Integer id,
+            @PathVariable
+            @Parameter(name = "dept", description = "Please enter department id of the employee", example = "123")
+                    Integer dept,
+            @RequestBody EmployeeDTO emp) {
         // service call to update
-        return ResponseEntity.ok().body(service.updateEmployeeById(id, emp));
+        return ResponseEntity.ok().body(service.updateEmployeeById(id,dept, emp));
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/{id}/{dept}")
     @Operation(
             summary = "PATCH /v1/employees/{id}",
             description = "To Update employee with EmpId equal to passed id")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<EmployeeDTO> patchEmployee(
-            @PathVariable Integer id, @RequestBody EmployeeDTO emp) {
+            @PathVariable Integer id,
+            @PathVariable
+            @Parameter(name = "dept", description = "Please enter department id of the employee", example = "123")
+                    Integer dept,
+            @RequestBody EmployeeDTO emp) {
         // service call to patch
-        return ResponseEntity.ok().body(service.patchEmployeeById(id, emp));
+        return ResponseEntity.ok().body(service.patchEmployeeById(id,dept, emp));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}/{dept}")
     @Operation(
             summary = "DELETE /v1/employees/{id}",
             description = "To delete employee with EmpId equal to passed id")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ResponseEntity<Message> deleteEmployee(@PathVariable Integer id) {
+    public ResponseEntity<Message> deleteEmployee(@PathVariable Integer id, @PathVariable
+    @Parameter(name = "dept", description = "Please enter department id of the employee", example = "123")
+            Integer dept) {
 
-        return ResponseEntity.ok().body(service.deleteEmployeeById(id));
+        return ResponseEntity.ok().body(service.deleteEmployeeById(id,dept));
     }
 }

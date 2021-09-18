@@ -23,6 +23,7 @@ public class EmployeeMapper {
         employeeDTO.setCity(addressEntity.getCity());
         employeeDTO.setCountry(addressEntity.getCountry());
         employeeDTO.setState(addressEntity.getState());
+        employeeDTO.setPinCode(addressEntity.getPinCode());
         return employeeDTO;
     }
 
@@ -35,11 +36,6 @@ public class EmployeeMapper {
         employeeEntity.setEmpContactNumber(employeeDto.getEmpContactNumber());
         employeeEntity.setEmpFirstName(employeeDto.getEmpFirstName());
         employeeEntity.setEmpLastName(employeeDto.getEmpLastName());
-        AddressEntity addressEntity = new AddressEntity();
-        addressEntity.setCity(employeeDto.getCity());
-        addressEntity.setCountry(employeeDto.getCountry());
-        addressEntity.setState(employeeDto.getState());
-        employeeEntity.setAddressEntity(addressEntity);
         return employeeEntity;
     }
 }

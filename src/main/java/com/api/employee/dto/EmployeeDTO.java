@@ -27,6 +27,8 @@ public class EmployeeDTO implements Serializable {
       message = "Number should be in format: {+91 1234567890, +911234567890, 1234567890}")
   private String empContactNumber;
 
+  @NotNull
+  private Integer pinCode;
   @NotEmpty
   private String city;
   @NotEmpty

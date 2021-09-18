@@ -19,8 +19,7 @@ import javax.validation.constraints.NotEmpty;
 public class AddressEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Integer pinCode;
     @NotEmpty
     private String city;
     @NotEmpty

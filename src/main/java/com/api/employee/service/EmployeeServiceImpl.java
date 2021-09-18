@@ -1,10 +1,12 @@
 package com.api.employee.service;
 
 import com.api.employee.dto.EmployeeDTO;
+import com.api.employee.entity.AddressEntity;
 import com.api.employee.entity.EmployeeEntity;
 import com.api.employee.entity.EmployeeKey;
 import com.api.employee.exception.EmployeeConflictException;
 import com.api.employee.mapper.EmployeeMapper;
+import com.api.employee.repository.AddressRepository;
 import com.api.employee.repository.EmployeeRepository;
 import com.api.employee.specification.EmployeeSpecification;
 import com.api.employee.utils.Message;
@@ -31,6 +33,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     private EmployeeRepository repository;
+    @Autowired
+    private AddressRepository addressRepository;
 
     @Autowired
     private EmployeeMapper mapper;
@@ -48,7 +52,8 @@ public class EmployeeServiceImpl implements EmployeeService {
                                 .or(EmployeeSpecification.likeOperation("empLastName", keyword))
                                 .or(EmployeeSpecification.likeOperation("empEmail", keyword))
                                 .or(EmployeeSpecification.likeOperation("employeeKey.deptId", keyword))
-                                .or(EmployeeSpecification.likeOperation("employeeKey.empId", keyword)),
+                                .or(EmployeeSpecification.likeOperation("employeeKey.empId", keyword))
+                                .or(EmployeeSpecification.likeOperation("addressEntity.pinCode", keyword)),
                         paging);
 
         Page<EmployeeDTO> pageResult =
@@ -74,8 +79,14 @@ public class EmployeeServiceImpl implements EmployeeService {
                 }
             }
         }
-
+        AddressEntity addressEntity=new AddressEntity();
+        addressEntity.setPinCode(employee.getPinCode());
+        addressEntity.setCity(employee.getCity());
+        addressEntity.setState(employee.getState());
+        addressEntity.setCountry(employee.getCountry());
+        addressRepository.save(addressEntity);
         EmployeeEntity employeeEntity = (mapper.convertToEmployeeEntity(employee));
+        employeeEntity.setAddressEntity(addressEntity);
         employeeEntity.getEmployeeKey().setDeptId(deptId);
 
         return mapper.convertToEmployeeDTO(repository.save(employeeEntity));

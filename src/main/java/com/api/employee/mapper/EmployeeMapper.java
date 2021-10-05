@@ -1,23 +1,41 @@
 package com.api.employee.mapper;
 
 import com.api.employee.dto.EmployeeDTO;
+import com.api.employee.entity.AddressEntity;
 import com.api.employee.entity.EmployeeEntity;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.convention.MatchingStrategies;
+import com.api.employee.entity.EmployeeKey;
 import org.springframework.stereotype.Service;
 
 @Service
 public class EmployeeMapper {
 
-  private final ModelMapper modelMapper = new ModelMapper();
 
-  public EmployeeDTO convertToEmployeeDTO(EmployeeEntity employee) {
-    modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-    return modelMapper.map(employee, EmployeeDTO.class);
-  }
+    public EmployeeDTO convertToEmployeeDTO(EmployeeEntity employee) {
+        EmployeeDTO employeeDTO = new EmployeeDTO();
+        employeeDTO.setEmpEmail(employee.getEmpEmail());
+        employeeDTO.setEmpContactNumber(employee.getEmpContactNumber());
+        employeeDTO.setEmpFirstName(employee.getEmpFirstName());
+        employeeDTO.setEmpLastName(employee.getEmpLastName());
+        AddressEntity addressEntity;
+        addressEntity = employee.getAddressEntity();
+        EmployeeKey employeeKey=employee.getEmployeeKey();
+        employeeDTO.setEmpId(employeeKey.getEmpId());
+        employeeDTO.setCity(addressEntity.getCity());
+        employeeDTO.setCountry(addressEntity.getCountry());
+        employeeDTO.setState(addressEntity.getState());
+        employeeDTO.setPinCode(addressEntity.getPinCode());
+        return employeeDTO;
+    }
 
-  public EmployeeEntity convertToEmployeeEntity(EmployeeDTO employee) {
-    modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-    return modelMapper.map(employee, EmployeeEntity.class);
-  }
+    public EmployeeEntity convertToEmployeeEntity(EmployeeDTO employeeDto) {
+        EmployeeEntity employeeEntity = new EmployeeEntity();
+        employeeEntity.setEmpEmail(employeeDto.getEmpEmail());
+        EmployeeKey employeeKey=new EmployeeKey();
+        employeeKey.setEmpId(employeeDto.getEmpId());
+        employeeEntity.setEmployeeKey(employeeKey);
+        employeeEntity.setEmpContactNumber(employeeDto.getEmpContactNumber());
+        employeeEntity.setEmpFirstName(employeeDto.getEmpFirstName());
+        employeeEntity.setEmpLastName(employeeDto.getEmpLastName());
+        return employeeEntity;
+    }
 }

@@ -26,4 +26,13 @@ public class EmployeeDTO implements Serializable {
       regexp = "(^([+]\\d{2}([ ])?)?\\d{10}$)",
       message = "Number should be in format: {+91 1234567890, +911234567890, 1234567890}")
   private String empContactNumber;
+
+  @NotNull
+  private Integer pinCode;
+  @NotEmpty
+  private String city;
+  @NotEmpty
+  private String state;
+  @NotEmpty
+  private String country;
 }
